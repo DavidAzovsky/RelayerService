@@ -17,7 +17,7 @@ router.get(
       .exists()
       .notEmpty()
       .withMessage("privatekey is required"),
-    body("secertkey").exists().notEmpty().withMessage("secertkey is required"),
+    body("secretkey").exists().notEmpty().withMessage("secretkey is required"),
   ],
   (req: any, res: any) => {
     const errors = validationResult(req);
@@ -27,7 +27,7 @@ router.get(
 
     const encryptPrivateKey = CryptoJS.AES.encrypt(
       req.body.privatekey,
-      req.body.secertkey
+      req.body.secretkey
     ).toString();
     return res.status(httpStatus.OK).json({
       status: httpStatus.OK,
@@ -41,14 +41,14 @@ router.get(
   "/decryptPrivateKey",
   [
     body("value").exists().notEmpty().withMessage("privatekey is required"),
-    body("secertkey").exists().notEmpty().withMessage("secertkey is required"),
+    body("secretkey").exists().notEmpty().withMessage("secretkey is required"),
   ],
   (req: any, res: any) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    var bytes = CryptoJS.AES.decrypt(req.body.value, req.body.secertkey);
+    var bytes = CryptoJS.AES.decrypt(req.body.value, req.body.secretkey);
     var originalText = bytes.toString(CryptoJS.enc.Utf8);
 
     return res.status(httpStatus.OK).json({
@@ -97,6 +97,7 @@ router.post(
 
       verifyMetaTx(forwardReq, req.body.signature).then(async (result) => {
         if (result) {
+          console.log(`Result is ${result}`);
           const hash = await makeTransaction(forwardReq, req.body.signature);
 
           return res.status(httpStatus.OK).json({

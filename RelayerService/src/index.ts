@@ -7,14 +7,14 @@ import router from "./routers";
 import helmet from "helmet";
 
 const app = express();
-const baseUri = "/api/v1";
 
 app.use(helmet());
 app.use(express.json());
-app.use(bodyParser.json({}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use(baseUri, router);
+app.use(router);
 
 app.listen(port, () => {
   console.log(`

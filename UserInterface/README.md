@@ -5,7 +5,6 @@ RelayerServiceClient Multiple users can submit EIP712 structured messages to rel
 ### Install
 
 ```sh
-git clone https://github.com/aravindhkm/RelayerServiceAutomata.git
 cd RelayerServiceClient
 npm install --save
 npm run start

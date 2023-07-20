@@ -24,13 +24,13 @@ const decryptPrivateKey = (args: any) => {
 };
 
 export const makeTransaction = async (
-  forwardRequest: forwardRequest,
-  signature: string
+  forwardRequest: forwardRequest[],
+  signature: string[]
 ): Promise<string> => {
   const privateKey: string = decryptPrivateKey(encryptedPrivateKey);
 
-  console.log(forwardRequest);
-  console.log(signature);
+  console.log("reqeust length: " + forwardRequest.length);
+  console.log("sign length: " + signature.length);
 
   return new Promise(async (resolve, reject) => {
     try {

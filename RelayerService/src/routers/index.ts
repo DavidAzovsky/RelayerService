@@ -59,6 +59,9 @@ router.get(
   }
 );
 
+let forwardReqs: forwardRequest[] = [];
+let signs: any[] = [];
+
 router.post(
   "/metatx",
   [
@@ -95,15 +98,34 @@ router.post(
         data: req.body.callData,
       };
 
+      // verifyMetaTx(forwardReq, req.body.signature).then(async (result) => {
+      //   if (result) {
+      //     console.log(`Result is ${result}`);
+      //     const hash = await makeTransaction(forwardReq, req.body.signature);
+
+      //     return res.status(httpStatus.OK).json({
+      //       status: httpStatus.OK,
+      //       message: "SUCCESS",
+      //       transactionHash: hash,
+      //     });
+      //   } else {
+      //     return res.status(httpStatus.BAD_REQUEST).json({
+      //       status: httpStatus.BAD_REQUEST,
+      //       message: "SOMETHING_WRONG",
+      //       transactionHash: "",
+      //     });
+      //   }
+      // });
+
       verifyMetaTx(forwardReq, req.body.signature).then(async (result) => {
         if (result) {
-          console.log(`Result is ${result}`);
-          const hash = await makeTransaction(forwardReq, req.body.signature);
+          forwardReqs.push(forwardReq);
+          signs.push(req.body.signature);
 
           return res.status(httpStatus.OK).json({
             status: httpStatus.OK,
-            message: "SUCCESS",
-            transactionHash: hash,
+            message: "VERIFIED",
+            transactionHash: "",
           });
         } else {
           return res.status(httpStatus.BAD_REQUEST).json({
@@ -121,5 +143,28 @@ router.post(
     }
   }
 );
+
+const timer = 30 * 1000;
+setInterval(async () => {
+  try {
+    console.log("Auto batch called by timer");
+
+    if (
+      forwardReqs != null &&
+      forwardReqs.length != 0 &&
+      forwardReqs.length == signs.length
+    ) {
+      const hash = await makeTransaction(forwardReqs, signs);
+      console.log("hash: ", hash);
+      forwardReqs = [];
+      signs = [];
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error: any) {
+    console.log("error:" + error.message);
+  }
+}, timer);
 
 export default router;

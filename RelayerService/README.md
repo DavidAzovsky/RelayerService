@@ -38,6 +38,6 @@ RPCURL=""
 List of available routes:
 
 **MetaTx routes**:\
-`POST /api/v1/metatx` - metatx\
-`GET /api/v1/encryptPrivateKey` - encryptPrivateKey\
-`GET /api/v1/decryptPrivateKey` - decryptPrivateKey\
+`POST /metatx` - metatx\
+`GET /encryptPrivateKey` - encryptPrivateKey\
+`GET /decryptPrivateKey` - decryptPrivateKey\

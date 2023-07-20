@@ -105,7 +105,7 @@ export default function HelloMetamask() {
             if(response.status == 200) {
               hashRef.current = response.hash;
               setLoadingStatus(false);
-              toast.success("Transaction Executed !", {
+              toast.success("Transaction verified !", {
                 position: toast.POSITION.TOP_RIGHT
               });
             } else {
@@ -146,7 +146,7 @@ export default function HelloMetamask() {
     } catch (e) {
        console.log("error", e)
     }
-    return {status,message,hash}
+    return {status,message, hash}
   }
 
   const onMetaTx = async(): Promise<ForwardRequest> => {

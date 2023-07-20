@@ -95,23 +95,24 @@ contract ReceiverForwarder is EIP712, Pausable, Ownable {
     }
 
     function execute(
-        ForwardRequest calldata req,
-        bytes calldata signature
+        ForwardRequest[] calldata req,
+        bytes[] calldata signature
     ) public whenNotPaused {
-        if (!verify(req, signature)) revert Signature_Not_Match();
-        if (
-            req.expireTime < block.number ||
-            ((block.number + EXPIRE_TIME_FOR_SIGN) < req.expireTime)
-        ) revert Signature_Expired();
-        _nonces[req.from] = req.nonce + 1;
+        require(req.length == signature.length, "invalid input");
+        for (uint i = 0; i < req.length; i++) {
+            if (!verify(req[i], signature[i])) continue;
+            if (
+                req[i].expireTime < block.number ||
+                ((block.number + EXPIRE_TIME_FOR_SIGN) < req[i].expireTime)
+            ) continue;
+            _nonces[req[i].from] = req[i].nonce + 1;
 
-        if (!_allowedFunction[bytes4(req.data[0:4])]) revert Invalid_CallData();
-        if (!_targetContractStatus[req.target]) revert Invalid_Target_Address();
+            if (!_allowedFunction[bytes4(req[i].data[0:4])]) continue;
+            if (!_targetContractStatus[req[i].target]) continue;
 
-        (bool success, ) = req.target.call(
-            abi.encodePacked(req.data, req.from)
-        );
-
-        if (!success) revert Call_Failed();
+            (bool success, ) = req[i].target.call(
+                abi.encodePacked(req[i].data, req[i].from)
+            );
+        }
     }
 }

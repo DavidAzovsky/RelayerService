@@ -45,21 +45,23 @@ export const makeTransaction = async (
       const estimateGas = await receiverInstance.methods
         .execute(forwardRequest, signature)
         .estimateGas({ from: address });
-      console.log("3");
+      console.log("3", estimateGas);
 
       const gasPrice = await currentWeb3.eth.getGasPrice();
-      console.log("4");
+      console.log("4"), gasPrice;
 
       const tx_data = {
         from: address,
         to: receiverForwarderContract,
-        gas: estimateGas,
+        gas: estimateGas * 2,
         gasPrice: gasPrice,
         data: calldata,
       };
 
+      console.log("address:", address);
+
       const receipt = await currentWeb3.eth.sendTransaction(tx_data);
-      console.log("5");
+      console.log(receipt);
       resolve(receipt.transactionHash);
       console.log("6");
     } catch (err: any) {

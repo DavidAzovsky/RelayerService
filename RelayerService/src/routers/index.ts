@@ -101,7 +101,10 @@ router.post(
       // verifyMetaTx(forwardReq, req.body.signature).then(async (result) => {
       //   if (result) {
       //     console.log(`Result is ${result}`);
-      //     const hash = await makeTransaction(forwardReq, req.body.signature);
+      //     const hash = await makeTransaction(
+      //       [forwardReq],
+      //       [req.body.signature]
+      //     );
 
       //     return res.status(httpStatus.OK).json({
       //       status: httpStatus.OK,
@@ -121,6 +124,8 @@ router.post(
         if (result) {
           forwardReqs.push(forwardReq);
           signs.push(req.body.signature);
+          console.log(forwardReq);
+          console.log(req.body.signature);
 
           return res.status(httpStatus.OK).json({
             status: httpStatus.OK,

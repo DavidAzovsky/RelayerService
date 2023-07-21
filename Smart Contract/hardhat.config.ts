@@ -64,6 +64,7 @@ export default {
     sepolia: {
       url: process.env.SEPOLIA_RPC_URL,
       accounts: [`0x${process.env.WALLET_PRIVATE_KEY}`],
+      blockGasLimit: 8000000,
     },
   },
 

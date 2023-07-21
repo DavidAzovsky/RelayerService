@@ -44,7 +44,7 @@ Before project, check `UserInterface\README.md`
 
 ### Then, submitted transaction is sent to `RelayerService` and these transactions are checked, batched together and sended to `ReceiverForwarder` contract every minute.
 
-`ReceiverForwarder` is part of `Smart Contract`
+`ReceiverForwarder` is part of `SmartContract`
 
 Before project, check `RelayerService\README.md`
 
@@ -99,7 +99,7 @@ It handles, executes each transaction indepently, since revert or failure in any
 
 Then you can see that your transaction is executed sucessfully on `etherscan.io`
 
-Before project, check `Smart Contract\README.md`
+Before project, check `SmartContract\README.md`
 
 ## Example of meta-transaction execution
 
@@ -110,4 +110,4 @@ transaction hash of sepolia testnet
 0xe98a4f620baf1098dfa5660a050ddbb40a1c1c83333ccc8839c617922e01b763
 ```
 
-**NOTE:** you can find detailed information of smart contracts' functions in `Smart Contract\docs\index.md`
+**NOTE:** you can find detailed information of smart contracts' functions in `SmartContract\docs\index.md`

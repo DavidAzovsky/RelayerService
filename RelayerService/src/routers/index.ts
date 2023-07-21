@@ -144,7 +144,7 @@ router.post(
   }
 );
 
-const timer = 30 * 1000;
+const timer = 60 * 1000;
 setInterval(async () => {
   try {
     console.log("Auto batch called by timer");

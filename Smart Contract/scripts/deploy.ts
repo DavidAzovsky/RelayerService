@@ -27,34 +27,34 @@ async function deploy() {
 
   trustedForwarder = ReceiverForwarder.address;
 
-  // const targetOne = await deployTargetToken(
-  //   "TargetTokenOne",
-  //   "TONE",
-  //   trustedForwarder
-  // );
-  // const targetTwo = await deployTargetToken(
-  //   "TargetTokenTwo",
-  //   "TTWO",
-  //   trustedForwarder
-  // );
-  // const targetThree = await deployTargetToken(
-  //   "TargetTokenThree",
-  //   "TTHREE",
-  //   trustedForwarder
-  // );
+  const targetOne = await deployTargetToken(
+    "TargetTokenOne",
+    "TONE",
+    trustedForwarder
+  );
+  const targetTwo = await deployTargetToken(
+    "TargetTokenTwo",
+    "TTWO",
+    trustedForwarder
+  );
+  const targetThree = await deployTargetToken(
+    "TargetTokenThree",
+    "TTHREE",
+    trustedForwarder
+  );
 
-  // await hre.run("verify:verify", {
-  //   address: targetOne,
-  //   constructorArguments: ["TargetTokenOne", "TONE", trustedForwarder],
-  // });
-  // await hre.run("verify:verify", {
-  //   address: targetTwo,
-  //   constructorArguments: ["TargetTokenTwo", "TTWO", trustedForwarder],
-  // });
-  // await hre.run("verify:verify", {
-  //   address: targetThree,
-  //   constructorArguments: ["TargetTokenThree", "TTHREE", trustedForwarder],
-  // });
+  await hre.run("verify:verify", {
+    address: targetOne,
+    constructorArguments: ["TargetTokenOne", "TONE", trustedForwarder],
+  });
+  await hre.run("verify:verify", {
+    address: targetTwo,
+    constructorArguments: ["TargetTokenTwo", "TTWO", trustedForwarder],
+  });
+  await hre.run("verify:verify", {
+    address: targetThree,
+    constructorArguments: ["TargetTokenThree", "TTHREE", trustedForwarder],
+  });
 }
 
 // We recommend this pattern to be able to use async/await everywhere

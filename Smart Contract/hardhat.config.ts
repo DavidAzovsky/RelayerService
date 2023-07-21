@@ -1,3 +1,4 @@
+import "solidity-docgen";
 import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
 import "@openzeppelin/hardhat-upgrades";
@@ -77,4 +78,6 @@ export default {
     outputDirectory: "coverage",
     runs: 1,
   },
+
+  docgen: { output: "docs", pages: () => "index.md" },
 };

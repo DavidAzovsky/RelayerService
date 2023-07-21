@@ -1,14 +1,13 @@
 # RelayerServiceServer
+
 Relayer service server can make the transaction.Who make the request based on EIP712 request in client side. Their transaction will execute in the contract based on the standard EIP2771.
 
 Please visit the Meta Transactions [https://eips.ethereum.org/EIPS/eip-2771](https://eips.ethereum.org/EIPS/eip-2771)
 
-
 ### Install
 
 ```sh
-git clone https://github.com/aravindhkm/RelayerServiceAutomata.git
-cd RelayerServiceServer
+cd RelayerService
 npm install --save
 npm run start
 ```
@@ -31,7 +30,6 @@ SECRETKEY=""
 RPCURL=""
 
 ```
-
 
 ### API Endpoints
 
